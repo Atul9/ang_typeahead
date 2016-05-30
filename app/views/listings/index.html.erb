@@ -1,0 +1,39 @@
+
+<div ng-app="typeahead" class="ng-scope" ng-controller="Ctrl">
+     <label>Requested By</label>
+     <input type="text" ng-model="countries"typeahead-min-length="2" placeholder="Country name" uib-typeahead="userdata as userdata.name for userdata in getUserData($viewValue)" typeahead-loading="loadingName" class="form-control"/><i ng-show="loadingName" class="glyphicon glyphicon-refresh"> </i>
+    <!--  <input type="text" autocomplete="off" ng-model="form.product" typeahead="option as option.name for option in p.options | filter:$viewValue" class="form-control col-md-2" />
+     <input type="text" autocomplete="off" ng-model="form.product" typeahead="names as names for names in names | filter:$viewValue" class="form-control col-md-2" />
+    </div> -->
+<script>
+    angular.module('typeahead', ['ui.bootstrap'])
+      .controller('Ctrl', function($scope, $http){
+        $scope.getUserData =function(input){
+
+          return $http({
+            url: 'http://localhost:3000/search',
+            dataType: 'json',
+            method: 'POST',
+            data: {
+                search: input
+            },
+            headers: {
+                "Content-Type": "application/json"
+            }
+
+        }).then(function successCallback(response){
+            console.log("SUcces");
+            console.log(response);
+            var arr = []
+            for(var i = 0;i < response.data.names.length;i++){
+                var obj = {}
+                obj["name"] = response.data.names[i];
+                arr.push(obj);
+            }
+            return arr;
+            console.log("here");
+        });
+        console.log("arr = ",arr);
+            //return arr;
+        }});
+</script>
