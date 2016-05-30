@@ -1,0 +1,21 @@
+console.log("Inside the file.")
+angular.module('typeahead', ['ui.bootstrap'])
+.controller('Ctrl', function($scope, $http){
+  $scope.getCountries = function(input){
+    console.log("Inside")
+    return $http({
+      url: "<%= Rails.application.routes.url_helpers.search_path %>",
+      dataType: 'json',
+      method: 'POST',
+      data: {
+        search: input
+      },
+      headers: {
+        "Content-Type": "application/json"
+      }
+
+    }).then(function successCallback(response){
+      return response.data.names;
+    });
+  }
+});
