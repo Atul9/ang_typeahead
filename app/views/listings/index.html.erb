@@ -1,4 +1,9 @@
-<div ng-app="typeahead" class="ng-scope" ng-controller="Ctrl">
-   <label>Requested By</label>
-   <input type="text" ng-model="countries" typeahead-min-length="2" placeholder="Country name" uib-typeahead="data as data for data in getData($viewValue)" class="form-control"/>
+<div ng-app="typeahead" class="container" ng-controller="Ctrl">
+  <h1> AngularJS typeahead example </h1>
+  <div class="col-md-6">
+    <label>Enter country name: (Type minimum 3 characters, ex: Ind)</label>
+    <div class="col-md-5">
+      <input type="text" ng-model="countries" typeahead-min-length="3" placeholder="Country name" uib-typeahead="data for data in getData($viewValue)" class="form-control col-md-2"/>
+    </div>
+  </div>
 </div>
