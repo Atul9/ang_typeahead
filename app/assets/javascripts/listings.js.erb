@@ -1,6 +1,6 @@
 console.log("Inside the file.")
 angular.module('typeahead', ['ui.bootstrap'])
-.controller('Ctrl', function($scope, $http){
+.controller('Ctrl', ['$scope', '$http', function($scope, $http){
   $scope.getData = function(input){
     console.log("Inside")
     return $http({
@@ -18,4 +18,4 @@ angular.module('typeahead', ['ui.bootstrap'])
       return response.data.names;
     });
   }
-});
+}]);
