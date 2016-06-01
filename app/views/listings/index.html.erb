@@ -3,7 +3,26 @@
   <div class="col-md-6">
     <label>Enter country name: (Type minimum 3 characters, ex: Ind)</label>
     <div class="col-md-5">
-      <input type="text" ng-model="countries" typeahead-min-length="3" placeholder="Country name" uib-typeahead="data for data in getData($viewValue)" class="form-control col-md-2"/>
+      <input type="text" ng-model="countries" placeholder="Country name" class="form-control col-md-2" id="myinput"/>
     </div>
   </div>
+  <div class="col-md-6"></div>
+  <table class="table" id="countries-table" >
+    <thead>
+      <th>No</th>
+      <th>Name</th>
+      </thead>
+
+    <tr ng-repeat="name in names">
+      <td>
+        {{ names.indexOf(name)}}
+      </td>
+      <td>
+        {{ name }}
+      </td>
+      <td>
+        <a ng-click="setName(names.indexOf(name))" class="glyphicon glyphicon-pencil"></a>
+      </td>
+    </tr>
+  </table>
 </div>

@@ -1,21 +1,28 @@
-console.log("Inside the file.")
-angular.module('typeahead', ['ui.bootstrap'])
-.controller('Ctrl', ['$scope', '$http', function($scope, $http){
+var app =angular.module('typeahead', []);
+app.controller('Ctrl', ['$scope', '$http', function($scope, $http){
   $scope.getData = function(input){
-    console.log("Inside")
-    return $http({
+    $http({
       url: "<%= Rails.application.routes.url_helpers.search_path %>",
-      dataType: 'json',
-      method: 'POST',
-      data: {
-        search: input
-      },
-      headers: {
-        "Content-Type": "application/json"
-      }
+        dataType: 'json',
+        method: 'POST',
+        data: {
+          search: $scope.countries
+        },
+        headers: {
+          "Content-Type": "application/json"
+        }
 
     }).then(function successCallback(response){
-      return response.data.names;
+      $scope.names = response.data.names;
     });
   }
+  $scope.setName = function(input){
+    $("#myinput").val($scope.names[input]);
+  }
 }]);
+$(document).ready(function(){
+  $('#myinput').keyup( function() {
+    if( this.value.length < 3 ) return;
+    angular.element($("#myinput")).scope().getData();
+  });
+});
