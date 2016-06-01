@@ -3,7 +3,7 @@
   <div class="col-md-6">
     <label>Enter country name: (Type minimum 3 characters, ex: Ind)</label>
     <div class="col-md-5">
-      <input type="text" ng-model="countries" placeholder="Country name" class="form-control col-md-2" id="myinput"/>
+      <input type="text" ng-model="country" placeholder="Country name" class="form-control col-md-2" ng-keyup="fetchCountries()"/>
     </div>
   </div>
   <div class="col-md-6"></div>

@@ -1,28 +1,26 @@
 var app =angular.module('typeahead', []);
 app.controller('Ctrl', ['$scope', '$http', function($scope, $http){
-  $scope.getData = function(input){
+  $scope.getData = function(){
     $http({
       url: "<%= Rails.application.routes.url_helpers.search_path %>",
         dataType: 'json',
         method: 'POST',
         data: {
-          search: $scope.countries
+          search: $scope.country
         },
         headers: {
           "Content-Type": "application/json"
         }
-
     }).then(function successCallback(response){
       $scope.names = response.data.names;
     });
   }
   $scope.setName = function(input){
-    $("#myinput").val($scope.names[input]);
+     $scope.country = $scope.names[input];
+  }
+  $scope.fetchCountries = function(){
+    if($scope.country.length > 2){
+      $scope.getData();
+    }
   }
 }]);
-$(document).ready(function(){
-  $('#myinput').keyup( function() {
-    if( this.value.length < 3 ) return;
-    angular.element($("#myinput")).scope().getData();
-  });
-});
